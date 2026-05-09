@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NJ Traffic Ticket Self-Help Guide | Points, Penalties, and Next Steps</title>
+    <meta
+      name="description"
+      content="Free New Jersey traffic ticket self-help tool. Select your ticket, license state, and driver risk factors to understand points, common penalties, and what to do before paying online."
+    >
+    <link rel="canonical" href="https://njtrafficticket.com/">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "NJ Traffic Ticket Self-Help",
+        "url": "https://njtrafficticket.com/",
+        "areaServed": "New Jersey",
+        "description": "Free informational guide for New Jersey traffic ticket points, penalties, and next steps.",
+        "provider": {
+          "@type": "LegalService",
+          "name": "The Law Offices of John Moldovan, Esq., LLC",
+          "url": "https://moldovanlegal.com/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="NJ Traffic Ticket Self-Help home">
+        <span class="brand-mark" aria-hidden="true">NJ</span>
+        <span>
+          <strong>NJ Traffic Ticket</strong>
+          <small>Self-help before you plead</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#lookup">Free Advice</a>
+        <a href="#calculators">Calculators</a>
+        <a href="#tool">Ticket Tool</a>
+        <a href="#steps">What To Do</a>
+        <a href="#donts">Dos &amp; Don'ts</a>
+        <a href="#lawyer">Need a Lawyer?</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="section-label">Free New Jersey Traffic Ticket Guide</p>
+          <h1 id="hero-title">Do not pay a New Jersey traffic ticket until you know what the plea can do.</h1>
+          <p class="hero-lede">
+            Paying online can close the case as a guilty plea. Use this self-help tool to check common points, payable fines,
+            license-state issues, insurance risk, and when it makes sense to speak with a lawyer first.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#tool">Check My Ticket</a>
+            <a class="button secondary" href="#steps">Start With The Basics</a>
+          </div>
+        </div>
+        <aside class="hero-visual" aria-label="Traffic ticket review preview">
+          <img
+            src="assets/traffic-ticket-review.png"
+            alt="Generic traffic ticket paperwork, car keys, and phone on a desk"
+            width="1586"
+            height="992"
+          >
+          <div class="ticket-preview" aria-label="Ticket risk preview">
+            <div class="ticket-top">
+              <span>Sample summons</span>
+              <strong>39:4-98</strong>
+            </div>
+            <div class="risk-strip">
+              <div>
+                <strong>Points</strong>
+                <span>2-5</span>
+              </div>
+              <div>
+                <strong>Before paying</strong>
+                <span>Check license impact</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="lookup" class="lookup-section" aria-labelledby="lookup-title">
+        <div class="section-heading">
+          <p class="section-label">Free Legal Advice Before You Pay</p>
+          <h2 id="lookup-title">Get a free traffic ticket consult by text or email.</h2>
+          <p>
+            Before you plead guilty online, send the details you have. The office can check the ticket, explain the likely
+            points and court-date issues, and tell you whether paying online may hurt your license, insurance, job, or CDL.
+          </p>
+        </div>
+        <div class="lookup-grid">
+          <form class="lookup-card lookup-form" id="court-lookup-form">
+            <fieldset class="lookup-mode-group">
+              <legend>Choose one lookup option</legend>
+              <label class="radio-row">
+                <input type="radio" name="lookupMode" value="nameDob" checked>
+                <span>Name + date of birth</span>
+              </label>
+              <label class="radio-row">
+                <input type="radio" name="lookupMode" value="nameLicense">
+                <span>Name + driver's license number</span>
+              </label>
+              <label class="radio-row">
+                <input type="radio" name="lookupMode" value="ticketNumber">
+                <span>Ticket number</span>
+              </label>
+            </fieldset>
+
+            <div class="lookup-mode-panel active" data-lookup-panel="nameDob">
+              <div class="field-row">
+                <label for="lookup-name-dob">Full name</label>
+                <input id="lookup-name-dob" name="nameForDob" autocomplete="name" placeholder="First and last name">
+              </div>
+              <div class="field-row">
+                <label for="lookup-dob">Date of birth</label>
+                <input id="lookup-dob" name="dateOfBirth" type="date" autocomplete="bday">
+              </div>
+            </div>
+
+            <div class="lookup-mode-panel" data-lookup-panel="nameLicense">
+              <div class="field-row">
+                <label for="lookup-name-license">Full name</label>
+                <input id="lookup-name-license" name="nameForLicense" autocomplete="name" placeholder="First and last name">
+              </div>
+              <div class="field-row">
+                <label for="lookup-license">Driver's license number</label>
+                <input id="lookup-license" name="licenseNumber" autocomplete="off" placeholder="Enter driver's license number">
+              </div>
+            </div>
+
+            <div class="lookup-mode-panel" data-lookup-panel="ticketNumber">
+              <div class="field-row">
+                <label for="lookup-ticket-number">Ticket number</label>
+                <input id="lookup-ticket-number" name="ticketNumber" autocomplete="off" placeholder="Enter ticket number">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <label for="intake-contact-name">Your name</label>
+              <input id="intake-contact-name" name="contactName" autocomplete="name" placeholder="First and last name" required>
+            </div>
+            <div class="field-row">
+              <label for="intake-phone">Phone number</label>
+              <input id="intake-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="Best text/callback number" required>
+            </div>
+            <div class="field-row">
+              <label for="intake-email">Email</label>
+              <input id="intake-email" name="email" type="email" autocomplete="email" placeholder="Best email address">
+            </div>
+            <fieldset class="contact-method-group">
+              <legend>How should we respond?</legend>
+              <label class="radio-row">
+                <input type="radio" name="preferredContact" value="text" checked>
+                <span>Text me</span>
+              </label>
+              <label class="radio-row">
+                <input type="radio" name="preferredContact" value="email">
+                <span>Email me</span>
+              </label>
+              <label class="radio-row">
+                <input type="radio" name="preferredContact" value="phone">
+                <span>Call me</span>
+              </label>
+            </fieldset>
+            <div class="field-row">
+              <label for="intake-notes">Anything urgent?</label>
+              <textarea id="intake-notes" name="notes" rows="4" placeholder="Example: court is tomorrow, CDL driver, license already has points"></textarea>
+            </div>
+
+            <label class="check-row consent-row">
+              <input type="checkbox" id="lookup-consent" required>
+              <span>I authorize the law office to review my ticket information and contact me by text, email, or phone about this free consult. I understand this request does not by itself create an attorney-client relationship.</span>
+            </label>
+            <button class="button primary" type="submit">Get Free Advice Before Paying</button>
+          </form>
+          <article class="lookup-card lookup-result" id="court-lookup-result" aria-live="polite">
+            <h3>Free consult includes</h3>
+            <p>After you submit, the office reviews the ticket information and follows up by your preferred method.</p>
+            <ul>
+              <li>Ticket or complaint status</li>
+              <li>Court name and court date, if available</li>
+              <li>Points and common consequence warning</li>
+              <li>Whether paying online could hurt you</li>
+              <li>What to do next if you want representation</li>
+            </ul>
+          </article>
+        </div>
+        <div class="lookup-warning">
+          <strong>Important:</strong> payment of a payable traffic ticket can operate as a guilty plea. Look up the ticket
+          first, then review points, insurance, license, CDL, and court consequences before paying.
+        </div>
+      </section>
+
+      <section id="calculators" class="calculators-section" aria-labelledby="calculators-title">
+        <div class="section-heading">
+          <p class="section-label">Free NJ Ticket Tools</p>
+          <h2 id="calculators-title">Check the risk before you decide what to do.</h2>
+          <p>
+            These quick tools help drivers understand why a small fine can still become an expensive license, insurance,
+            or employment problem.
+          </p>
+        </div>
+        <div class="calculator-grid">
+          <form class="calculator-card" id="points-calculator">
+            <h3>NJ points and surcharge risk calculator</h3>
+            <div class="field-row">
+              <label for="current-points">Current points on your license</label>
+              <input id="current-points" name="currentPoints" type="number" min="0" max="30" value="0">
+            </div>
+            <div class="field-row">
+              <label for="new-ticket-points">Points from this ticket</label>
+              <select id="new-ticket-points" name="newTicketPoints">
+                <option value="0">0 points</option>
+                <option value="2" selected>2 points</option>
+                <option value="3">3 points</option>
+                <option value="4">4 points</option>
+                <option value="5">5 points</option>
+              </select>
+            </div>
+            <article class="tool-output" id="points-calculator-result" aria-live="polite"></article>
+          </form>
+
+          <form class="calculator-card" id="pay-quiz">
+            <h3>Should I pay this ticket online?</h3>
+            <label class="check-row">
+              <input type="checkbox" name="hasPoints">
+              <span>The ticket has points or I am not sure.</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" name="cdlOrWork">
+              <span>I have a CDL or drive for work.</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" name="priorTickets">
+              <span>I already have points, recent tickets, or a suspension history.</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" name="accidentOrCourt">
+              <span>There was an accident, injury, or court date.</span>
+            </label>
+            <article class="tool-output" id="pay-quiz-result" aria-live="polite"></article>
+          </form>
+        </div>
+        <div class="tool-link-grid" aria-label="Traffic ticket topic pages">
+          <a href="speeding-ticket-nj/">NJ speeding tickets</a>
+          <a href="careless-driving-nj/">Careless driving</a>
+          <a href="reckless-driving-nj/">Reckless driving</a>
+          <a href="nj-points-system/">NJ points system</a>
+          <a href="cdl-traffic-ticket-nj/">CDL traffic tickets</a>
+          <a href="out-of-state-driver-nj-ticket/">Out-of-state drivers</a>
+          <a href="unsafe-operation-nj/">Unsafe operation</a>
+          <a href="driving-while-suspended-nj/">Driving while suspended</a>
+          <a href="tailgating-ticket-nj/">Tailgating</a>
+          <a href="cell-phone-ticket-nj/">Cell phone tickets</a>
+          <a href="red-light-ticket-nj/">Red light tickets</a>
+          <a href="stop-sign-ticket-nj/">Stop sign tickets</a>
+          <a href="improper-turn-ticket-nj/">Improper turn</a>
+          <a href="failure-to-signal-ticket-nj/">Failure to signal</a>
+          <a href="unsafe-lane-change-nj/">Unsafe lane change</a>
+          <a href="failure-to-yield-ticket-nj/">Failure to yield</a>
+          <a href="leaving-scene-accident-nj/">Leaving the scene</a>
+          <a href="no-insurance-ticket-nj/">No insurance</a>
+          <a href="expired-registration-ticket-nj/">Expired registration</a>
+          <a href="driving-without-license-nj/">Driving without license</a>
+          <a href="probationary-driver-ticket-nj/">Probationary drivers</a>
+        </div>
+      </section>
+
+      <section id="tool" class="tool-section" aria-labelledby="tool-title">
+        <div class="section-heading">
+          <p class="section-label">Ticket Impact Tool</p>
+          <h2 id="tool-title">Select your ticket and driver situation.</h2>
+          <p>
+            This tool uses common New Jersey violations and official NJ point guidance. It is informational only and does
+            not create an attorney-client relationship.
+          </p>
+        </div>
+
+        <div class="tool-grid">
+          <form class="tool-card" id="ticket-form">
+            <label for="ticket-select">Ticket or statute</label>
+            <select id="ticket-select" name="ticket"></select>
+
+            <label for="license-state">Where is your driver's license from?</label>
+            <select id="license-state" name="licenseState">
+              <option value="NJ">New Jersey</option>
+              <option value="NY">New York</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="CT">Connecticut</option>
+              <option value="OTHER">Another state</option>
+            </select>
+
+            <fieldset>
+              <legend>Risk factors</legend>
+              <label class="check-row">
+                <input type="checkbox" id="cdl">
+                <span>I have a CDL or drive for work</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" id="probationary">
+                <span>I am a new/probationary driver</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" id="prior-points">
+                <span>I already have points or recent tickets</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" id="accident">
+                <span>There was an accident, injury, or court-required appearance</span>
+              </label>
+            </fieldset>
+          </form>
+
+          <article class="result-card" id="result" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section id="steps" class="content-band" aria-labelledby="steps-title">
+        <div class="media-heading">
+          <div class="section-heading compact">
+            <p class="section-label">First 24 Hours</p>
+            <h2 id="steps-title">What to do after getting a traffic ticket in NJ.</h2>
+          </div>
+          <figure class="inline-photo">
+            <img
+              src="assets/traffic-ticket-review.png"
+              alt="A traffic ticket being reviewed before online payment"
+              width="1586"
+              height="992"
+              loading="lazy"
+            >
+          </figure>
+        </div>
+        <div class="step-list">
+          <article>
+            <span>1</span>
+            <h3>Read the exact statute number.</h3>
+            <p>The statute controls the points and risk. A speeding ticket, careless driving, reckless driving, and unsafe operation all behave differently.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Check whether court is mandatory.</h3>
+            <p>Some matters cannot simply be paid through the Violations Bureau, especially where injury, CDL issues, serious speed, or related charges are involved.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Do not treat online payment as harmless.</h3>
+            <p>NJMCDirect is convenient, but paying a payable ticket generally means pleading guilty and accepting the conviction consequences.</p>
+          </article>
+          <article>
+            <span>4</span>
+            <h3>Look beyond the fine.</h3>
+            <p>The bigger problem may be MVC points, surcharges, insurance increases, license suspension exposure, CDL consequences, or home-state reporting.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="donts" class="split-section" aria-labelledby="donts-title">
+        <div>
+          <p class="section-label">Dos &amp; Don'ts</p>
+          <h2 id="donts-title">Before you decide whether to pay, plead, or fight.</h2>
+        </div>
+        <div class="dos-grid">
+          <article>
+            <h3>Do</h3>
+            <ul>
+              <li>Save the ticket, complaint number, and court date.</li>
+              <li>Check the statute and point exposure before acting.</li>
+              <li>Ask whether a plea amendment could reduce points or risk.</li>
+              <li>Speak with a lawyer if your license, job, CDL, or insurance is exposed.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Don't</h3>
+            <ul>
+              <li>Do not pay online just to make the ticket disappear.</li>
+              <li>Do not miss the court date or ignore notices.</li>
+              <li>Do not assume a low fine means low consequences.</li>
+              <li>Do not admit facts in writing without understanding the record it creates.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="lawyer" class="lawyer-section" aria-labelledby="lawyer-title">
+        <figure class="lawyer-photo">
+          <img
+            src="assets/legal-consultation-ticket.png"
+            alt="Generic traffic ticket paperwork prepared for legal review"
+            width="1448"
+            height="1086"
+            loading="lazy"
+          >
+        </figure>
+        <div class="lawyer-copy">
+          <div>
+            <p class="section-label">When Self-Help Is Not Enough</p>
+            <h2 id="lawyer-title">Talk to a New Jersey traffic ticket lawyer before the plea is entered.</h2>
+            <p>
+              If the ticket can affect your license, job, insurance, CDL, immigration posture, or record, get legal advice
+              before pleading guilty or paying online.
+            </p>
+          </div>
+          <div class="lawyer-actions">
+            <a class="button primary" href="https://moldovanlegal.com/traffic-tickets/">Traffic Ticket Lawyer</a>
+            <a class="button secondary" href="tel:+15514305800">Call 551-430-5800</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="sources" aria-labelledby="sources-title">
+        <h2 id="sources-title">Official sources used</h2>
+        <ul>
+          <li><a href="https://www.nj.gov/mvc/license/points-schedule.htm">NJ MVC Points Schedule</a></li>
+          <li><a href="https://www.nj.gov/mvc/license/surcharge.htm">NJ MVC Surcharges</a></li>
+          <li><a href="https://www.njcourts.gov/courts/municipal">NJ Courts Municipal Court and NJMCDirect information</a></li>
+          <li><a href="https://www.njcourts.gov/sites/default/files/courts/municipal/municipal-violations-bureau-schedule.pdf">NJ Courts Statewide Violations Bureau Schedule</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        NJTrafficTicket.com is an informational self-help resource. It is not legal advice and does not create an
+        attorney-client relationship.
+      </p>
+      <p>
+        Lawyer advertising. Operated in connection with The Law Offices of John Moldovan, Esq., LLC.
+        <a href="https://moldovanlegal.com/">MoldovanLegal.com</a>
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

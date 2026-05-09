@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: njtrafficticket
+    runtime: node
+    plan: starter
+    buildCommand: npm run generate
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: ALLOWED_ORIGIN
+        value: https://njtrafficticket.com
+      - key: INTAKE_WEBHOOK_URL
+        sync: false
+      - key: INTAKE_WEBHOOK_SECRET
+        sync: false

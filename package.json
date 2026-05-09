@@ -1,0 +1,14 @@
+{
+  "name": "njtrafficticket-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "generate": "node scripts/generate-pages.mjs",
+    "check": "node --check app.js && node --check server.js && node --check scripts/generate-pages.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
