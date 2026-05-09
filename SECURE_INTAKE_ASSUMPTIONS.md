@@ -11,7 +11,7 @@ This version does not require NJMCDirect API credentials. It is designed for a h
 2. Visitor provides contact name, phone number, optional email, and preferred response method.
 3. Browser sends the request by HTTPS POST to `/api/ticket-review-intake`.
 4. The backend validates the fields.
-5. The backend forwards the request to a secure office intake destination.
+5. The backend sends the request by SMS to `866-553-4251` through Twilio, and can optionally forward a copy to a secure office intake destination.
 6. Staff reviews official court systems and follows up with the visitor.
 
 ## Security assumptions
@@ -20,20 +20,24 @@ This version does not require NJMCDirect API credentials. It is designed for a h
 - Sensitive identifiers are not placed in URLs.
 - Sensitive identifiers are not stored in browser `localStorage` or `sessionStorage`.
 - The server does not log ticket numbers, license numbers, dates of birth, or notes.
-- Intake submissions route to a PII-aware CRM, secure form backend, or encrypted intake service.
+- Intake submissions route through Twilio SMS to the office number, with an optional PII-aware CRM, secure form backend, or encrypted intake service backup.
 - Do not route dates of birth or license numbers through ordinary unencrypted email.
 
 ## Environment variables
 
 Copy `.env.example` into the production environment and set:
 
-- `INTAKE_WEBHOOK_URL`
-- `INTAKE_WEBHOOK_SECRET`, if your intake service supports bearer authentication
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+- `TWILIO_FROM_NUMBER`
+- `SMS_TO_NUMBER=+18665534251`
+- `INTAKE_WEBHOOK_URL`, optional
+- `INTAKE_WEBHOOK_SECRET`, optional if your intake service supports bearer authentication
 - `ALLOWED_ORIGIN=https://njtrafficticket.com`
 
 ## Current behavior
 
-Until `INTAKE_WEBHOOK_URL` is configured, `/api/ticket-review-intake` validates the request and returns a setup message instead of accepting live sensitive submissions.
+Until the Twilio variables are configured, `/api/ticket-review-intake` validates the request and returns a setup message instead of accepting live sensitive submissions.
 
 ## Intake payload
 

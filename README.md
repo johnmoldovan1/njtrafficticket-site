@@ -32,9 +32,15 @@ npm start
 Required production settings:
 
 - HTTPS only
-- `INTAKE_WEBHOOK_URL`
-- `INTAKE_WEBHOOK_SECRET`, if supported by your intake service
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+- `TWILIO_FROM_NUMBER`
+- `SMS_TO_NUMBER=+18665534251`
+- `INTAKE_WEBHOOK_URL`, optional CRM/secure backup
+- `INTAKE_WEBHOOK_SECRET`, optional if supported by your intake service
 - `ALLOWED_ORIGIN=https://njtrafficticket.com`
+
+The consult form sends SMS through Twilio when the Twilio variables are configured. Without those variables, the form validates but returns a setup message instead of accepting sensitive submissions.
 
 ## Current live deployment
 

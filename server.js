@@ -7,6 +7,10 @@ const root = fileURLToPath(new URL(".", import.meta.url));
 const port = Number(process.env.PORT || 8097);
 const intakeWebhookUrl = process.env.INTAKE_WEBHOOK_URL || "";
 const intakeWebhookSecret = process.env.INTAKE_WEBHOOK_SECRET || "";
+const smsToNumber = process.env.SMS_TO_NUMBER || "+18665534251";
+const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID || "";
+const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN || "";
+const twilioFromNumber = process.env.TWILIO_FROM_NUMBER || "";
 const timeoutMs = Number(process.env.INTAKE_TIMEOUT_MS || 12000);
 const allowedOrigin = process.env.ALLOWED_ORIGIN || "";
 
@@ -139,6 +143,66 @@ function buildIntakePayload(payload) {
   };
 }
 
+function formatSmsBody(payload) {
+  const id = payload.ticketIdentifier;
+  const lines = [
+    "NJTrafficTicket free consult request",
+    `Contact: ${payload.contact.name}`,
+    `Phone: ${payload.contact.phone}`,
+    `Email: ${payload.contact.email || "not provided"}`,
+    `Preferred: ${payload.contact.preferredContact}`,
+    `Lookup: ${id.lookupMode}`
+  ];
+
+  if (id.lookupMode === "nameDob") {
+    lines.push(`Name on ticket: ${id.fullName}`);
+    lines.push(`DOB: ${id.dateOfBirth}`);
+  }
+
+  if (id.lookupMode === "nameLicense") {
+    lines.push(`Name on ticket: ${id.fullName}`);
+    lines.push(`DL: ${id.licenseNumber}`);
+  }
+
+  if (id.lookupMode === "ticketNumber") {
+    lines.push(`Ticket: ${id.ticketNumber}`);
+  }
+
+  if (payload.notes) {
+    lines.push(`Notes: ${payload.notes}`);
+  }
+
+  return lines.join("\n").slice(0, 1500);
+}
+
+async function sendTwilioSms(intakePayload, signal) {
+  if (!twilioAccountSid || !twilioAuthToken || !twilioFromNumber) {
+    return { configured: false };
+  }
+
+  const form = new URLSearchParams({
+    To: smsToNumber,
+    From: twilioFromNumber,
+    Body: formatSmsBody(intakePayload)
+  });
+  const credentials = Buffer.from(`${twilioAccountSid}:${twilioAuthToken}`).toString("base64");
+  const response = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`, {
+    method: "POST",
+    signal,
+    headers: {
+      "Authorization": `Basic ${credentials}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: form
+  });
+
+  if (!response.ok) {
+    return { configured: true, ok: false };
+  }
+
+  return { configured: true, ok: true };
+}
+
 async function handleTicketReviewIntake(request, response) {
   if (request.method !== "POST") {
     sendJson(response, 405, { error: "Method not allowed" });
@@ -169,14 +233,14 @@ async function handleTicketReviewIntake(request, response) {
 
   const intakePayload = buildIntakePayload(payload);
 
-  if (!intakeWebhookUrl) {
+  if (!intakeWebhookUrl && (!twilioAccountSid || !twilioAuthToken || !twilioFromNumber)) {
     sendJson(response, 501, {
       error: "Intake routing not configured",
-      message: "The secure review form is ready, but the office intake destination has not been configured yet.",
+      message: "The review form is ready, but SMS delivery has not been configured yet.",
       nextSteps: [
-        "Add INTAKE_WEBHOOK_URL on the server.",
-        "Use a HIPAA/PII-aware CRM, secure form backend, or encrypted intake service.",
-        "Do not send license numbers or dates of birth through ordinary unencrypted email."
+        "Add TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_FROM_NUMBER on Render.",
+        "SMS will be sent to 866-553-4251.",
+        "Optional: also add INTAKE_WEBHOOK_URL for a CRM or secure backup."
       ]
     });
     return;
@@ -186,21 +250,31 @@ async function handleTicketReviewIntake(request, response) {
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const intakeResponse = await fetch(intakeWebhookUrl, {
-      method: "POST",
-      signal: controller.signal,
-      headers: {
-        ...(intakeWebhookSecret ? { "Authorization": `Bearer ${intakeWebhookSecret}` } : {}),
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(intakePayload)
-    });
+    const deliveries = [];
 
-    if (!intakeResponse.ok) {
+    const smsDelivery = await sendTwilioSms(intakePayload, controller.signal);
+    if (smsDelivery.configured) {
+      deliveries.push(smsDelivery.ok ? "sms" : "sms_failed");
+    }
+
+    if (intakeWebhookUrl) {
+      const intakeResponse = await fetch(intakeWebhookUrl, {
+        method: "POST",
+        signal: controller.signal,
+        headers: {
+          ...(intakeWebhookSecret ? { "Authorization": `Bearer ${intakeWebhookSecret}` } : {}),
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(intakePayload)
+      });
+      deliveries.push(intakeResponse.ok ? "webhook" : "webhook_failed");
+    }
+
+    if (!deliveries.includes("sms") && !deliveries.includes("webhook")) {
       sendJson(response, 502, {
         error: "Review request not delivered",
-        message: "The secure intake destination did not accept the request. Please call the office."
+        message: "The text message could not be sent. Please call the office."
       });
       return;
     }
