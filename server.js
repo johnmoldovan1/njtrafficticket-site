@@ -226,7 +226,10 @@ async function handleTicketReviewIntake(request, response) {
 
 async function serveStatic(request, response) {
   const url = new URL(request.url, `http://${request.headers.host}`);
-  const requestedPath = url.pathname === "/" ? "/index.html" : decodeURIComponent(url.pathname);
+  let requestedPath = url.pathname === "/" ? "/index.html" : decodeURIComponent(url.pathname);
+  if (requestedPath.endsWith("/")) {
+    requestedPath += "index.html";
+  }
   const filePath = normalize(join(root, requestedPath));
 
   if (!filePath.startsWith(root)) {
