@@ -2,7 +2,7 @@ services:
   - type: web
     name: njtrafficticket
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm run generate
     startCommand: npm start
     envVars:
