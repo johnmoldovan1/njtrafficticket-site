@@ -36,6 +36,32 @@ Required production settings:
 - `INTAKE_WEBHOOK_SECRET`, if supported by your intake service
 - `ALLOWED_ORIGIN=https://njtrafficticket.com`
 
+## Current live deployment
+
+- GitHub: `https://github.com/johnmoldovan1/njtrafficticket-site`
+- Render service: `https://dashboard.render.com/web/srv-d7vi2ad0lvsc73ft13i0`
+- Temporary live URL: `https://njtrafficticket.onrender.com`
+
+The custom domains are already attached in Render:
+
+- `njtrafficticket.com`
+- `www.njtrafficticket.com`
+
+They remain unverified until DNS is updated at WordPress.com, where this domain currently uses `ns1.wordpress.com`, `ns2.wordpress.com`, and `ns3.wordpress.com`.
+
+DNS records to add/update:
+
+| Host | Type | Value |
+| --- | --- | --- |
+| `@` / root | `A` | `216.24.57.1` |
+| `www` | `CNAME` | `njtrafficticket.onrender.com` |
+
+Remove conflicting old WordPress web records:
+
+- root `A` records pointing to `192.0.78.24`
+- root `A` records pointing to `192.0.78.25`
+- `www` CNAME pointing back to `njtrafficticket.com`
+
 ## SEO notes
 
 - Keep this site unique. Do not copy traffic ticket pages from `moldovanlegal.com`.
