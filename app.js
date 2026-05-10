@@ -216,6 +216,9 @@ const stateNotes = {
   NY: "For a New York license, a NJ conviction may be reported back and handled under New York rules. Check your NY DMV record and insurance exposure before pleading.",
   PA: "For a Pennsylvania license, a NJ conviction may be reported back and handled under Pennsylvania rules. Your home-state DMV and insurer may treat it differently than NJ.",
   CT: "For a Connecticut license, a NJ conviction may be reported back and handled under Connecticut rules. Check home-state consequences before assuming the NJ points number is the whole story.",
+  DE: "For a Delaware license, a NJ conviction may be reported back and may affect your home-state record or insurance in ways that differ from NJ point labels.",
+  MD: "For a Maryland license, a NJ conviction may be reported back and may affect your home-state record, insurer, or employment driving status.",
+  FL: "For a Florida license, a NJ conviction can still matter for insurance and record review even though the ticket is handled in New Jersey.",
   OTHER: "For an out-of-state license, the NJ court result can still matter. Your home state and insurer may receive or use the conviction under their own rules."
 };
 
@@ -230,6 +233,10 @@ const pointsCalculator = document.querySelector("#points-calculator");
 const pointsCalculatorResult = document.querySelector("#points-calculator-result");
 const payQuiz = document.querySelector("#pay-quiz");
 const payQuizResult = document.querySelector("#pay-quiz-result");
+const cdlRiskChecker = document.querySelector("#cdl-risk-checker");
+const cdlRiskResult = document.querySelector("#cdl-risk-result");
+const stateImpactChecker = document.querySelector("#state-impact-checker");
+const stateImpactResult = document.querySelector("#state-impact-result");
 const inputs = ["license-state", "cdl", "probationary", "prior-points", "accident"].map((id) => document.querySelector(`#${id}`));
 
 function initTickets() {
@@ -413,11 +420,50 @@ function renderPayQuiz() {
   payQuizResult.innerHTML = `<h4>${escapeHtml(title)}</h4><p>${escapeHtml(message)} <a href="#lookup">Ask for a free consult.</a></p>`;
 }
 
+function renderCdlRiskChecker() {
+  if (!cdlRiskChecker || !cdlRiskResult) return;
+
+  const checked = [...cdlRiskChecker.querySelectorAll("input[type='checkbox']")].filter((input) => input.checked).length;
+  const isWarning = checked > 0;
+  const title = checked >= 2 ? "High priority: get review before pleading" : isWarning ? "Work-driving risk is present" : "No CDL/work risk selected";
+  const message = checked >= 2
+    ? "A CDL, work-driving role, or serious charge can turn a traffic ticket into an employment problem. Do not pay online until the ticket is reviewed."
+    : isWarning
+      ? "Even if the ticket looks payable, work-driving rules and employer insurance can make the result more expensive than the fine."
+      : "If you do not drive for work and do not have a CDL, focus on points, insurance, prior record, and court-date issues.";
+
+  cdlRiskResult.classList.toggle("warning", isWarning);
+  cdlRiskResult.innerHTML = `<h4>${escapeHtml(title)}</h4><p>${escapeHtml(message)} <a href="#lookup">Send the ticket for free review.</a></p>`;
+}
+
+function renderStateImpactChecker() {
+  if (!stateImpactChecker || !stateImpactResult) return;
+
+  const state = stateImpactChecker.homeStateImpact.value;
+  const outOfState = state !== "NJ";
+  const title = outOfState ? "Check home-state consequences before paying" : "NJ points and surcharges are the direct issue";
+  const note = {
+    NJ: "For a New Jersey license, focus on NJ MVC points, surcharge exposure, insurance, and whether the plea affects future ticket options.",
+    NY: "For a New York license, a New Jersey conviction may be reported back and handled under New York DMV and insurance rules.",
+    PA: "For a Pennsylvania license, a New Jersey conviction may be reported back and may affect your Pennsylvania record or insurance differently than NJ points suggest.",
+    CT: "For a Connecticut license, check how Connecticut treats the New Jersey conviction before pleading guilty.",
+    DE: "For a Delaware license, do not assume the NJ point number is the only issue; home-state reporting and insurance can matter.",
+    MD: "For a Maryland license, a New Jersey conviction may still follow you home through reporting and insurance underwriting.",
+    FL: "For a Florida license, the ticket may still be visible to insurers or licensing authorities even though the case is in New Jersey.",
+    OTHER: "For any out-of-state license, your home state and insurer may handle the conviction under their own rules."
+  }[state];
+
+  stateImpactResult.classList.toggle("warning", outOfState);
+  stateImpactResult.innerHTML = `<h4>${escapeHtml(title)}</h4><p>${escapeHtml(note)} <a href="#lookup">Ask before paying online.</a></p>`;
+}
+
 initTickets();
 renderResult();
 syncLookupMode();
 renderPointsCalculator();
 renderPayQuiz();
+renderCdlRiskChecker();
+renderStateImpactChecker();
 
 form.addEventListener("change", renderResult);
 inputs.forEach((input) => input.addEventListener("change", renderResult));
@@ -434,4 +480,12 @@ if (pointsCalculator) {
 
 if (payQuiz) {
   payQuiz.addEventListener("change", renderPayQuiz);
+}
+
+if (cdlRiskChecker) {
+  cdlRiskChecker.addEventListener("change", renderCdlRiskChecker);
+}
+
+if (stateImpactChecker) {
+  stateImpactChecker.addEventListener("change", renderStateImpactChecker);
 }

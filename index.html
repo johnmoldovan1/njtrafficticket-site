@@ -16,12 +16,18 @@
         "@type": "LegalService",
         "name": "NJ Traffic Ticket Self-Help",
         "url": "https://njtrafficticket.com/",
+        "telephone": "+1-551-430-5800",
         "areaServed": "New Jersey",
         "description": "Free informational guide for New Jersey traffic ticket points, penalties, and next steps.",
+        "sameAs": [
+          "https://moldovanlegal.com/"
+        ],
         "provider": {
           "@type": "LegalService",
           "name": "The Law Offices of John Moldovan, Esq., LLC",
-          "url": "https://moldovanlegal.com/"
+          "url": "https://moldovanlegal.com/",
+          "telephone": "+1-551-430-5800",
+          "areaServed": "New Jersey"
         }
       }
     </script>
@@ -39,6 +45,7 @@
         <a href="#lookup">Free Advice</a>
         <a href="#calculators">Calculators</a>
         <a href="#tool">Ticket Tool</a>
+        <a href="#cities">Cities</a>
         <a href="#steps">What To Do</a>
         <a href="#donts">Dos &amp; Don'ts</a>
         <a href="#lawyer">Need a Lawyer?</a>
@@ -246,8 +253,49 @@
             </label>
             <article class="tool-output" id="pay-quiz-result" aria-live="polite"></article>
           </form>
+
+          <form class="calculator-card" id="cdl-risk-checker">
+            <h3>CDL and work-driver risk checker</h3>
+            <label class="check-row">
+              <input type="checkbox" name="hasCdl">
+              <span>I have a CDL, even if I was driving my personal car.</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" name="drivesForWork">
+              <span>I drive for work, rideshare, delivery, sales, or a company vehicle.</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" name="seriousCharge">
+              <span>The ticket is speeding 15+ over, reckless, tailgating, cellphone, suspended, no insurance, or accident-related.</span>
+            </label>
+            <article class="tool-output" id="cdl-risk-result" aria-live="polite"></article>
+          </form>
+
+          <form class="calculator-card" id="state-impact-checker">
+            <h3>Out-of-state driver impact checker</h3>
+            <div class="field-row">
+              <label for="home-state-impact">Where is your license from?</label>
+              <select id="home-state-impact" name="homeStateImpact">
+                <option value="NJ">New Jersey</option>
+                <option value="NY">New York</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="MD">Maryland</option>
+                <option value="FL">Florida</option>
+                <option value="OTHER">Another state</option>
+              </select>
+            </div>
+            <article class="tool-output" id="state-impact-result" aria-live="polite"></article>
+          </form>
         </div>
         <div class="tool-link-grid" aria-label="Traffic ticket topic pages">
+          <a href="nj-traffic-ticket-lawyer/">NJ traffic ticket lawyer</a>
+          <a href="nj-speeding-ticket-lawyer/">NJ speeding ticket lawyer</a>
+          <a href="njmcdirect-ticket-help/">NJMCDirect ticket help</a>
+          <a href="nj-municipal-court-ticket/">NJ municipal court tickets</a>
+          <a href="nj-license-suspension-traffic-ticket/">License suspension risk</a>
+          <a href="nj-traffic-ticket-insurance-impact/">Insurance impact</a>
           <a href="speeding-ticket-nj/">NJ speeding tickets</a>
           <a href="careless-driving-nj/">Careless driving</a>
           <a href="reckless-driving-nj/">Reckless driving</a>
@@ -272,6 +320,44 @@
         </div>
       </section>
 
+      <section id="cities" class="local-section" aria-labelledby="cities-title">
+        <div class="section-heading">
+          <p class="section-label">Municipal Court Pages</p>
+          <h2 id="cities-title">Traffic ticket help for high-volume New Jersey courts.</h2>
+          <p>
+            City pages help drivers find practical information by court location, then route high-risk cases into the
+            free ticket review form before they pay online.
+          </p>
+        </div>
+        <div class="city-link-grid" aria-label="New Jersey traffic ticket city pages">
+          <a href="newark-traffic-ticket/">Newark</a>
+          <a href="jersey-city-traffic-ticket/">Jersey City</a>
+          <a href="paterson-traffic-ticket/">Paterson</a>
+          <a href="elizabeth-traffic-ticket/">Elizabeth</a>
+          <a href="edison-traffic-ticket/">Edison</a>
+          <a href="woodbridge-traffic-ticket/">Woodbridge</a>
+          <a href="clifton-traffic-ticket/">Clifton</a>
+          <a href="trenton-traffic-ticket/">Trenton</a>
+          <a href="cherry-hill-traffic-ticket/">Cherry Hill</a>
+          <a href="toms-river-traffic-ticket/">Toms River</a>
+          <a href="hamilton-nj-traffic-ticket/">Hamilton</a>
+          <a href="camden-traffic-ticket/">Camden</a>
+          <a href="passaic-traffic-ticket/">Passaic</a>
+          <a href="union-city-traffic-ticket/">Union City</a>
+          <a href="bayonne-traffic-ticket/">Bayonne</a>
+          <a href="north-bergen-traffic-ticket/">North Bergen</a>
+          <a href="atlantic-city-traffic-ticket/">Atlantic City</a>
+          <a href="parsippany-traffic-ticket/">Parsippany</a>
+          <a href="wayne-traffic-ticket/">Wayne</a>
+          <a href="freehold-traffic-ticket/">Freehold</a>
+          <a href="fort-lee-traffic-ticket/">Fort Lee</a>
+          <a href="teaneck-traffic-ticket/">Teaneck</a>
+          <a href="east-orange-traffic-ticket/">East Orange</a>
+          <a href="morristown-traffic-ticket/">Morristown</a>
+        </div>
+        <a class="directory-link" href="nj-municipal-court-directory/">View the municipal court traffic ticket directory</a>
+      </section>
+
       <section id="tool" class="tool-section" aria-labelledby="tool-title">
         <div class="section-heading">
           <p class="section-label">Ticket Impact Tool</p>
@@ -293,6 +379,9 @@
               <option value="NY">New York</option>
               <option value="PA">Pennsylvania</option>
               <option value="CT">Connecticut</option>
+              <option value="DE">Delaware</option>
+              <option value="MD">Maryland</option>
+              <option value="FL">Florida</option>
               <option value="OTHER">Another state</option>
             </select>
 
@@ -414,6 +503,22 @@
         </div>
       </section>
 
+      <section class="trust-section" aria-labelledby="trust-title">
+        <div>
+          <p class="section-label">Trust and Privacy</p>
+          <h2 id="trust-title">Built to help drivers act before the plea is entered.</h2>
+          <p>
+            The site is a free self-help resource connected to a New Jersey law office. The intake form is for initial
+            review and is not a substitute for signed representation.
+          </p>
+        </div>
+        <div class="trust-grid">
+          <a href="attorney-reviewed/">Attorney-reviewed content standards</a>
+          <a href="privacy-policy/">Privacy and intake notice</a>
+          <a href="nj-traffic-ticket-lawyer/">When to talk to a lawyer</a>
+        </div>
+      </section>
+
       <section class="sources" aria-labelledby="sources-title">
         <h2 id="sources-title">Official sources used</h2>
         <ul>
@@ -434,7 +539,17 @@
         Lawyer advertising. Operated in connection with The Law Offices of John Moldovan, Esq., LLC.
         <a href="https://moldovanlegal.com/">MoldovanLegal.com</a>
       </p>
+      <p>
+        <a href="privacy-policy/">Privacy Policy</a> ·
+        <a href="attorney-reviewed/">Attorney Review Standards</a> ·
+        <a href="sitemap.xml">Sitemap</a>
+      </p>
     </footer>
+
+    <aside class="sticky-cta" aria-label="Free ticket review">
+      <a href="#lookup">Text My Ticket For Free Review</a>
+      <a href="tel:+15514305800">Call 551-430-5800</a>
+    </aside>
 
     <script src="app.js"></script>
   </body>
